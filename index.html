@@ -1,0 +1,872 @@
+<div id="ivf-resource-shop">
+<style>
+  #ivf-resource-shop {
+    --paper: #FFFFFF;
+    --paper-card: #FFFFFF;
+    --ink: #232323;
+    --ink-soft: #767676;
+    --line: #E8E8E8;
+    --bibs: #3C5A85;
+    --pibs: #7C5470;
+    --gibs: #4F7A52;
+    --accent: #2B6D46;
+    --accent-bg: #EAF3EC;
+    --accent-line: #BFDBC9;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', -apple-system, 'Malgun Gothic', sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    padding: 0 0 96px 0;
+    line-height: 1.6;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  #ivf-resource-shop *, #ivf-resource-shop *::before, #ivf-resource-shop *::after {
+    box-sizing: inherit;
+  }
+  #ivf-resource-shop h1, #ivf-resource-shop h2, #ivf-resource-shop h3 {
+    font-family: 'Noto Sans KR', -apple-system, 'Malgun Gothic', sans-serif;
+    font-weight: 800;
+    margin: 0;
+    color: var(--ink);
+  }
+  #ivf-resource-shop .ivf-brand-logo {
+    padding: 24px 28px 0 28px;
+  }
+  #ivf-resource-shop .ivf-brand-logo img {
+    height: 26px;
+    display: block;
+  }
+  #ivf-resource-shop .ivf-hero {
+    padding: 16px 28px 32px 28px;
+    border-bottom: 1px solid var(--line);
+  }
+  #ivf-resource-shop .ivf-hero h1 {
+    font-size: 28px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+  #ivf-resource-shop .ivf-hero p {
+    margin: 14px 0 0 0;
+    color: var(--ink-soft);
+    font-size: 15px;
+    max-width: 52ch;
+  }
+  #ivf-resource-shop .ivf-aff {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  #ivf-resource-shop .ivf-aff-label {
+    font-size: 13px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  #ivf-resource-shop .ivf-aff-btns {
+    display: flex;
+    gap: 8px;
+  }
+  #ivf-resource-shop .ivf-aff-btn {
+    border: 1px solid var(--line);
+    background: var(--paper-card);
+    color: var(--ink);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+  }
+  #ivf-resource-shop .ivf-aff-btn.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  #ivf-resource-shop section {
+    padding: 40px 28px;
+    border-bottom: 1px solid var(--line);
+  }
+  #ivf-resource-shop .ivf-section-head {
+    margin-bottom: 20px;
+  }
+  #ivf-resource-shop .ivf-section-head h2 {
+    font-size: 22px;
+  }
+  #ivf-resource-shop .ivf-section-head p {
+    margin: 8px 0 0 0;
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+  #ivf-resource-shop .ivf-note {
+    margin-top: 18px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    border-left: 2px solid var(--line);
+    padding-left: 10px;
+  }
+  #ivf-resource-shop .ivf-note div { margin: 2px 0; }
+
+  /* detail toggle (accordion) */
+  #ivf-resource-shop .ivf-detail-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 22px;
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  #ivf-resource-shop .ivf-detail-toggle .ivf-chevron {
+    display: inline-block;
+    transition: transform .2s;
+    font-size: 11px;
+  }
+  #ivf-resource-shop .ivf-detail-toggle.open .ivf-chevron {
+    transform: rotate(180deg);
+  }
+  #ivf-resource-shop .ivf-detail-gallery {
+    display: none;
+    margin-top: 16px;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+  }
+  #ivf-resource-shop .ivf-detail-gallery.open {
+    display: block;
+  }
+  #ivf-resource-shop .ivf-detail-gallery img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+  #ivf-resource-shop .ivf-detail-gallery img:last-child {
+    margin-bottom: 0;
+  }
+
+  /* book cover cards */
+  #ivf-resource-shop .ivf-books-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  #ivf-resource-shop .ivf-book {
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  #ivf-resource-shop .ivf-book-cover {
+    aspect-ratio: 3 / 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  #ivf-resource-shop .ivf-book-cover svg { width: 46%; height: 46%; }
+  #ivf-resource-shop .ivf-book-cover .ivf-letter {
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+    color: rgba(255,255,255,.85);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 12px;
+    letter-spacing: .04em;
+  }
+  #ivf-resource-shop .ivf-book-body {
+    padding: 12px 14px 16px 14px;
+  }
+  #ivf-resource-shop .ivf-book-name {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  #ivf-resource-shop .ivf-price {
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  #ivf-resource-shop .ivf-price b {
+    color: var(--ink);
+    font-size: 15px;
+  }
+  #ivf-resource-shop .ivf-strike {
+    text-decoration: line-through;
+    color: #B0A48C;
+    margin-right: 5px;
+  }
+
+  /* stepper */
+  #ivf-resource-shop .ivf-stepper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  #ivf-resource-shop .ivf-stepper button {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--ink);
+  }
+  #ivf-resource-shop .ivf-stepper button:active { background: var(--accent-bg); }
+  #ivf-resource-shop .ivf-stepper input.ivf-qty {
+    width: 40px;
+    min-width: 40px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 4px 2px;
+    background: var(--paper);
+  }
+  #ivf-resource-shop .ivf-stepper input.ivf-qty::-webkit-inner-spin-button,
+  #ivf-resource-shop .ivf-stepper input.ivf-qty::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* bundle highlight card */
+  #ivf-resource-shop .ivf-bundle {
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-line);
+    border-radius: 6px;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  #ivf-resource-shop .ivf-bundle-title {
+    font-weight: 700;
+    font-size: 15px;
+  }
+  #ivf-resource-shop .ivf-bundle-sub {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-top: 3px;
+  }
+
+  /* kit cards (row of two wide cards) */
+  #ivf-resource-shop .ivf-kit-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 560px) {
+    #ivf-resource-shop .ivf-kit-row { grid-template-columns: 1fr; }
+  }
+  #ivf-resource-shop .ivf-kit-card {
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: 4px;
+    padding: 18px 18px 16px 16px;
+  }
+  #ivf-resource-shop .ivf-kit-card h3 { font-size: 15px; margin-bottom: 6px; }
+  #ivf-resource-shop .ivf-kit-photo {
+    width: 100%;
+    border-radius: 6px;
+    display: block;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 14px rgba(42,36,32,.18);
+  }
+
+  /* booklet rows */
+  #ivf-resource-shop .ivf-booklet {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+  #ivf-resource-shop .ivf-booklet:first-of-type { border-top: none; }
+  #ivf-resource-shop .ivf-booklet-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1 1 220px;
+    min-width: 220px;
+  }
+  #ivf-resource-shop .ivf-booklet-cover {
+    width: 54px;
+    height: 76px;
+    object-fit: cover;
+    border-radius: 3px;
+    box-shadow: 0 3px 8px rgba(42,36,32,.18);
+    flex-shrink: 0;
+    background: var(--paper);
+  }
+  #ivf-resource-shop .ivf-booklet-name {
+    font-weight: 700;
+    font-size: 15px;
+    max-width: 26ch;
+  }
+  #ivf-resource-shop .ivf-booklet-formats {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  #ivf-resource-shop .ivf-format-label {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-bottom: 2px;
+  }
+
+  /* sticky summary bar */
+  #ivf-resource-shop .ivf-summary-bar {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 30;
+    background: var(--accent);
+    color: #fff;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 14px;
+  }
+  #ivf-resource-shop .ivf-summary-bar .ivf-total b { font-size: 17px; }
+  #ivf-resource-shop .ivf-cta {
+    background: #fff;
+    color: var(--accent);
+    border: none;
+    border-radius: 22px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  #ivf-resource-shop .ivf-cta-solid {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 22px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  /* order panel */
+  #ivf-resource-shop .ivf-order-panel {
+    display: none;
+    padding: 32px 28px 120px 28px;
+    background: var(--paper-card);
+  }
+  #ivf-resource-shop .ivf-order-panel.open { display: block; }
+  #ivf-resource-shop .ivf-field { margin-bottom: 14px; }
+  #ivf-resource-shop .ivf-field label {
+    display: block;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 5px;
+  }
+  #ivf-resource-shop .ivf-field input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  #ivf-resource-shop textarea {
+    width: 100%;
+    min-height: 220px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'Courier New', monospace;
+    background: var(--paper);
+    color: var(--ink);
+    resize: vertical;
+  }
+  #ivf-resource-shop .ivf-order-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  #ivf-resource-shop .ivf-btn-secondary {
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    padding: 10px 18px;
+    border-radius: 22px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  #ivf-resource-shop .ivf-copied-msg {
+    font-size: 13px;
+    color: var(--gibs);
+    margin-left: 4px;
+    display: none;
+  }
+</style>
+
+<div class="ivf-brand-logo">
+  <img src="covers/ivf-logo.png" alt="IVF">
+</div>
+
+<div class="ivf-hero">
+  <h1>성경 공부의 새로운 깊이로,<br>IVF 성경공부 자료실</h1>
+  <p>귀납적 성경연구 시리즈부터 대학생, 청소년을 위한 기본 성경공부 교재까지 — 필요한 자료를 담고, 소속을 선택하면 주문서를 자동으로 작성해 드려요.</p>
+  <p style="margin-top:8px; font-size:13px; color:var(--accent); font-weight:700;">전체 구매금액 7만원 이상 시 배송비 무료</p>
+</div>
+
+<div class="ivf-aff">
+  <span class="ivf-aff-label">받으시는 분 소속</span>
+  <div class="ivf-aff-btns">
+    <button class="ivf-aff-btn active" data-aff="general" onclick="ivfShop.setAff('general', this)">졸업생 · 일반</button>
+    <button class="ivf-aff-btn" data-aff="member" onclick="ivfShop.setAff('member', this)">IVF 학생 · 간사</button>
+  </div>
+</div>
+
+<!-- SECTION 1: BIBS / PIBS / GIBS -->
+<section>
+  <div class="ivf-section-head">
+    <h2>귀납적 성경연구 시리즈 · B, P, G</h2>
+    <p>귀납적 성경연구를 다양한 모습으로 배우고 실습할 수 있게 도와주는 시리즈북이에요.</p>
+  </div>
+
+  <div class="ivf-books-row">
+    <div class="ivf-book">
+      <div class="ivf-book-cover"><img src="covers/bibs.jpg" alt="BIBS" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="ivf-book-body">
+        <div class="ivf-book-name">쉽게 하는 귀납적 성경연구 (BIBS)</div>
+        <div class="ivf-price" data-price-for="bibs"></div>
+        <div class="ivf-stepper">
+          <button onclick="ivfShop.step('bibs',-1)">−</button>
+          <input type="number" class="ivf-qty" id="qty-bibs" value="0" min="0" inputmode="numeric" onchange="ivfShop.setQty('bibs', this.value)">
+          <button onclick="ivfShop.step('bibs',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ivf-book">
+      <div class="ivf-book-cover"><img src="covers/pibs.jpg" alt="PIBS" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="ivf-book-body">
+        <div class="ivf-book-name">스스로 하는 귀납적 성경연구 (PIBS)</div>
+        <div class="ivf-price" data-price-for="pibs"></div>
+        <div class="ivf-stepper">
+          <button onclick="ivfShop.step('pibs',-1)">−</button>
+          <input type="number" class="ivf-qty" id="qty-pibs" value="0" min="0" inputmode="numeric" onchange="ivfShop.setQty('pibs', this.value)">
+          <button onclick="ivfShop.step('pibs',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ivf-book">
+      <div class="ivf-book-cover"><img src="covers/gibs.jpg" alt="GIBS" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="ivf-book-body">
+        <div class="ivf-book-name">함께 하는 귀납적 성경연구 (GIBS)</div>
+        <div class="ivf-price" data-price-for="gibs"></div>
+        <div class="ivf-stepper">
+          <button onclick="ivfShop.step('gibs',-1)">−</button>
+          <input type="number" class="ivf-qty" id="qty-gibs" value="0" min="0" inputmode="numeric" onchange="ivfShop.setQty('gibs', this.value)">
+          <button onclick="ivfShop.step('gibs',1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ivf-bundle">
+    <div>
+      <div class="ivf-bundle-title">B·P·G 3권 세트 (각 1권씩)</div>
+      <div class="ivf-bundle-sub" data-price-for="set"></div>
+    </div>
+    <div class="ivf-stepper">
+      <button onclick="ivfShop.step('set',-1)">−</button>
+      <input type="number" class="ivf-qty" id="qty-set" value="0" min="0" inputmode="numeric" onchange="ivfShop.setQty('set', this.value)">
+      <button onclick="ivfShop.step('set',1)">+</button>
+    </div>
+  </div>
+
+  <div class="ivf-note">
+    <div>· 본 도서는 PDF 파일 형태로 판매하지 않습니다</div>
+  </div>
+
+  <button class="ivf-detail-toggle" id="detail-toggle-bpg" onclick="ivfShop.toggleDetail('bpg')">
+    자세히 보기 <span class="ivf-chevron">▾</span>
+  </button>
+  <div class="ivf-detail-gallery" id="detail-gallery-bpg">
+    <img src="covers/detail-bpg/1.jpg" alt="BPG 시리즈 상세 1">
+    <img src="covers/detail-bpg/2.jpg" alt="BPG 시리즈 상세 2">
+    <img src="covers/detail-bpg/3.jpg" alt="BPG 시리즈 상세 3">
+    <img src="covers/detail-bpg/4.jpg" alt="BPG 시리즈 상세 4">
+    <img src="covers/detail-bpg/5.jpg" alt="BPG 시리즈 상세 5">
+    <img src="covers/detail-bpg/6.jpg" alt="BPG 시리즈 상세 6">
+    <img src="covers/detail-bpg/7.jpg" alt="BPG 시리즈 상세 7">
+    <img src="covers/detail-bpg/8.jpg" alt="BPG 시리즈 상세 8">
+  </div>
+</section>
+
+<!-- SECTION 2: GIBS 진행키트 -->
+<section>
+  <div class="ivf-section-head">
+    <h2>GIBS 진행키트</h2>
+    <p>소그룹 성경공부를 인도하는 분들을 위한 진행 도구예요. GIBS 책을 반영한 사용 가이드와 &lt;기본 GIBS&gt;·&lt;여섯색깔 GIBS&gt;·&lt;대면극 GIBS&gt; 세 가지 방식의 GIBS를 위한 플레이 아이템이 담겨 있어요.</p>
+  </div>
+
+  <img class="ivf-kit-photo" src="covers/kit.png" alt="GIBS 진행키트">
+
+  <div class="ivf-kit-row">
+    <div class="ivf-kit-card">
+      <h3>진행키트만</h3>
+      <div class="ivf-price" data-price-for="kit"></div>
+      <div class="ivf-stepper">
+        <button onclick="ivfShop.step('kit',-1)">−</button>
+        <input type="number" class="ivf-qty" id="qty-kit" value="0" min="0" inputmode="numeric" onchange="ivfShop.setQty('kit', this.value)">
+        <button onclick="ivfShop.step('kit',1)">+</button>
+      </div>
+    </div>
+    <div class="ivf-kit-card">
+      <h3>진행키트 + GIBS 책 세트</h3>
+      <div class="ivf-price" data-price-for="kitset"></div>
+      <div class="ivf-stepper">
+        <button onclick="ivfShop.step('kitset',-1)">−</button>
+        <input type="number" class="ivf-qty" id="qty-kitset" value="0" min="0" inputmode="numeric" onchange="ivfShop.setQty('kitset', this.value)">
+        <button onclick="ivfShop.step('kitset',1)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="ivf-detail-toggle" id="detail-toggle-kit" onclick="ivfShop.toggleDetail('kit')">
+    자세히 보기 <span class="ivf-chevron">▾</span>
+  </button>
+  <div class="ivf-detail-gallery" id="detail-gallery-kit">
+    <img src="covers/detail-kit/1.png" alt="GIBS 진행키트 상세 1">
+    <img src="covers/detail-kit/2.png" alt="GIBS 진행키트 상세 2">
+    <img src="covers/detail-kit/3.png" alt="GIBS 진행키트 상세 3">
+    <img src="covers/detail-kit/4.png" alt="GIBS 진행키트 상세 4">
+    <img src="covers/detail-kit/5.png" alt="GIBS 진행키트 상세 5">
+    <img src="covers/detail-kit/6.png" alt="GIBS 진행키트 상세 6">
+    <img src="covers/detail-kit/7.png" alt="GIBS 진행키트 상세 7">
+    <img src="covers/detail-kit/8.png" alt="GIBS 진행키트 상세 8">
+    <img src="covers/detail-kit/9.png" alt="GIBS 진행키트 상세 9">
+  </div>
+</section>
+
+<!-- SECTION 3: 청년부 교재 -->
+<section>
+  <div class="ivf-section-head">
+    <h2>IVF 성경공부 스테디셀러 4종</h2>
+    <p>다양한 관점을 통해 복음 이야기와 하나님 나라의 삶에 대해 나눌 수 있는 기본 성경공부 교재들이에요.</p>
+  </div>
+
+  <div id="ivf-booklets"></div>
+
+  <div class="ivf-note">
+    <div>· PDF 파일은 1인당 1파일 구매를 원칙으로 하며, 임의 인쇄·공유는 불가합니다</div>
+    <div>· PDF 샘플이 필요하시면 이메일로 요청해 주세요</div>
+  </div>
+
+  <button class="ivf-detail-toggle" id="detail-toggle-booklets" onclick="ivfShop.toggleDetail('booklets')">
+    자세히 보기 <span class="ivf-chevron">▾</span>
+  </button>
+  <div class="ivf-detail-gallery" id="detail-gallery-booklets">
+    <img src="covers/detail-booklets/1.jpg" alt="4종 교재 상세 1">
+    <img src="covers/detail-booklets/2.jpg" alt="4종 교재 상세 2">
+    <img src="covers/detail-booklets/3.jpg" alt="4종 교재 상세 3">
+    <img src="covers/detail-booklets/4.jpg" alt="4종 교재 상세 4">
+    <img src="covers/detail-booklets/5.jpg" alt="4종 교재 상세 5">
+    <img src="covers/detail-booklets/6.jpg" alt="4종 교재 상세 6">
+    <img src="covers/detail-booklets/7.jpg" alt="4종 교재 상세 7">
+  </div>
+</section>
+
+<!-- SUMMARY BAR -->
+<div class="ivf-summary-bar">
+  <div class="ivf-total">담은 자료 <b id="ivf-total-count">0</b>개 · 총 <b id="ivf-total-price">0</b>원 <span id="ivf-shipping-note" style="opacity:.85;"></span></div>
+  <button class="ivf-cta" onclick="ivfShop.openOrder()">주문서 만들기</button>
+</div>
+
+<!-- ORDER PANEL -->
+<div class="ivf-order-panel" id="ivf-order-panel">
+  <h2 style="font-size:20px; margin-bottom:18px;">주문서 작성</h2>
+
+  <div class="ivf-field">
+    <label>받으시는 분 성함</label>
+    <input type="text" id="ivf-r-name" placeholder="홍길동">
+  </div>
+  <div class="ivf-field">
+    <label>소속 단체 · 캠퍼스명 (해당 시)</label>
+    <input type="text" id="ivf-r-org" placeholder="예: OO대학교 IVF">
+  </div>
+  <div class="ivf-field">
+    <label>받으시는 분 전화번호</label>
+    <input type="text" id="ivf-r-phone" placeholder="010-0000-0000">
+  </div>
+  <div class="ivf-field">
+    <label>받으시는 분 주소</label>
+    <input type="text" id="ivf-r-address" placeholder="배송받으실 주소를 입력해 주세요">
+  </div>
+  <div class="ivf-field" id="ivf-pdf-email-field" style="display:none;">
+    <label>PDF 열람용 이메일 (PDF 계정 발급용)</label>
+    <input type="text" id="ivf-r-pdf-email" placeholder="example@email.com">
+  </div>
+
+  <div class="ivf-field">
+    <label>주문서 미리보기 (아래 내용이 이메일로 전달돼요)</label>
+    <textarea id="ivf-order-text" readonly></textarea>
+  </div>
+
+  <div class="ivf-order-actions">
+    <button class="ivf-btn-secondary" onclick="ivfShop.copyOrder()">주문서 복사하기</button>
+    <button class="ivf-cta-solid" onclick="ivfShop.mailOrder()">이메일로 보내기</button>
+    <span class="ivf-copied-msg" id="ivf-copied-msg">복사되었어요 ✓</span>
+  </div>
+</div>
+
+<script>
+(function(){
+  var FREE_SHIP = 70000;
+  var PRICE = {
+    bibs:  { member: 7000,  general: 10000 },
+    pibs:  { member: 7000,  general: 10000 },
+    gibs:  { member: 7000,  general: 10000 },
+    set:   { member: 20000, general: 27000 },
+    kit:   { member: 28000, general: 35000 },
+    kitset:{ member: 33000, general: 42000 }
+  };
+  var BOOKLETS = [
+    { id:'gospel',     name:'나와 너, 우리를 찾아온 복음',   member:4000, general:5000, pdf:3600, cover:'covers/bogeum.jpg' },
+    { id:'findme',     name:'나를 찾아가는 이야기 (나찾기)', member:4000, general:5000, pdf:3600, cover:'covers/nachatgi.jpg' },
+    { id:'meeting',    name:'그리스도와의 진실한 만남',       member:3000, general:3600, pdf:3600, cover:'covers/mannam.jpg' },
+    { id:'conversion', name:'하나님 나라 복음으로의 회심',    member:3000, general:3600, pdf:3600, cover:'covers/hoesim.jpg' }
+  ];
+  var LABELS = {
+    bibs:'BIBS 개별', pibs:'PIBS 개별', gibs:'GIBS 개별',
+    set:'B·P·G 3권 세트', kit:'GIBS 진행키트', kitset:'GIBS 진행키트 + 책 세트'
+  };
+  var AFF_LABEL = { member:'IVF 학생 및 간사', general:'졸업생 및 일반' };
+
+  var state = { aff:'general', qty:{ bibs:0,pibs:0,gibs:0,set:0,kit:0,kitset:0 }, booklet:{} };
+  BOOKLETS.forEach(function(b){ state.booklet[b.id] = { paper:0, pdf:0 }; });
+
+  function fmt(n){ return n.toLocaleString('ko-KR'); }
+
+  function renderBooklets(){
+    var wrap = document.getElementById('ivf-booklets');
+    wrap.innerHTML = BOOKLETS.map(function(b){
+      return '<div class="ivf-booklet">'
+        + '<div class="ivf-booklet-left">'
+        +   '<img class="ivf-booklet-cover" src="'+b.cover+'" alt="'+b.name+'">'
+        +   '<div class="ivf-booklet-name">'+b.name+'</div>'
+        + '</div>'
+        + '<div class="ivf-booklet-formats">'
+        +   '<div><div class="ivf-format-label">종이책 · <span id="price-'+b.id+'-paper"></span></div>'
+        +     '<div class="ivf-stepper"><button onclick="ivfShop.stepBook(\''+b.id+'\',\'paper\',-1)">−</button>'
+        +     '<input type="number" class="ivf-qty" id="qty-'+b.id+'-paper" value="0" min="0" inputmode="numeric" onchange="ivfShop.setBookQty(\''+b.id+'\',\'paper\',this.value)">'
+        +     '<button onclick="ivfShop.stepBook(\''+b.id+'\',\'paper\',1)">+</button></div></div>'
+        +   '<div><div class="ivf-format-label">PDF · '+fmt(b.pdf)+'원</div>'
+        +     '<div class="ivf-stepper"><button onclick="ivfShop.stepBook(\''+b.id+'\',\'pdf\',-1)">−</button>'
+        +     '<input type="number" class="ivf-qty" id="qty-'+b.id+'-pdf" value="0" min="0" inputmode="numeric" onchange="ivfShop.setBookQty(\''+b.id+'\',\'pdf\',this.value)">'
+        +     '<button onclick="ivfShop.stepBook(\''+b.id+'\',\'pdf\',1)">+</button></div></div>'
+        + '</div></div>';
+    }).join('');
+  }
+
+  function updatePriceLabels(){
+    ['bibs','pibs','gibs'].forEach(function(k){
+      var el = document.querySelector('[data-price-for="'+k+'"]');
+      var p = PRICE[k][state.aff];
+      el.innerHTML = (state.aff==='member' ? '<span class="ivf-strike">'+fmt(PRICE[k].general)+'원</span>' : '') + '<b>'+fmt(p)+'원</b>';
+    });
+    var setEl = document.querySelector('[data-price-for="set"]');
+    setEl.innerHTML = '개별 구매보다 저렴해요 · <b>'+fmt(PRICE.set[state.aff])+'원</b>';
+    var kitEl = document.querySelector('[data-price-for="kit"]');
+    kitEl.innerHTML = (state.aff==='member' ? '<span class="ivf-strike">'+fmt(PRICE.kit.general)+'원</span>' : '') + '<b>'+fmt(PRICE.kit[state.aff])+'원</b>';
+    var kitsetEl = document.querySelector('[data-price-for="kitset"]');
+    kitsetEl.innerHTML = (state.aff==='member' ? '<span class="ivf-strike">'+fmt(PRICE.kitset.general)+'원</span>' : '') + '<b>'+fmt(PRICE.kitset[state.aff])+'원</b>';
+
+    BOOKLETS.forEach(function(b){
+      var pEl = document.getElementById('price-'+b.id+'-paper');
+      var price = b[state.aff];
+      pEl.innerHTML = (state.aff==='member' ? '<span class="ivf-strike">'+fmt(b.general)+'원</span>' : '') + fmt(price)+'원';
+    });
+  }
+
+  function calcTotal(){
+    var total = 0, count = 0, hasPdf = false;
+    ['bibs','pibs','gibs','set','kit','kitset'].forEach(function(k){
+      var q = state.qty[k];
+      if(q>0){ total += PRICE[k][state.aff]*q; count += q; }
+    });
+    BOOKLETS.forEach(function(b){
+      var s = state.booklet[b.id];
+      if(s.paper>0){ total += b[state.aff]*s.paper; count += s.paper; }
+      if(s.pdf>0){ total += b.pdf*s.pdf; count += s.pdf; hasPdf = true; }
+    });
+    return { total:total, count:count, hasPdf:hasPdf };
+  }
+
+  function updateSummary(){
+    var r = calcTotal();
+    document.getElementById('ivf-total-count').textContent = r.count;
+    document.getElementById('ivf-total-price').textContent = fmt(r.total);
+    var shipEl = document.getElementById('ivf-shipping-note');
+    shipEl.textContent = (r.total >= FREE_SHIP) ? '· 배송비 무료 🎁' : '';
+    var pdfField = document.getElementById('ivf-pdf-email-field');
+    if(pdfField) pdfField.style.display = r.hasPdf ? 'block' : 'none';
+  }
+
+  function buildOrderText(){
+    var lines = ['<주문내역>'];
+    ['set','bibs','pibs','gibs','kit','kitset'].forEach(function(k){
+      var q = state.qty[k];
+      if(q>0) lines.push('- '+LABELS[k]+' : '+q+'개');
+    });
+    BOOKLETS.forEach(function(b){
+      var s = state.booklet[b.id];
+      if(s.paper>0) lines.push('- '+b.name+' (종이책) : '+s.paper+'권');
+      if(s.pdf>0) lines.push('- '+b.name+' (PDF) : '+s.pdf+'권');
+    });
+    if(lines.length===1) lines.push('(담긴 자료가 없어요)');
+    var r = calcTotal();
+    lines.push('');
+    lines.push('총 금액 : '+fmt(r.total)+'원 ('+(r.total>=FREE_SHIP ? '배송비 무료' : '배송비 별도')+')');
+    lines.push('');
+    lines.push('<수령자 정보>');
+    lines.push('받으시는 분 성함 : '+(document.getElementById('ivf-r-name').value || ''));
+    var org = document.getElementById('ivf-r-org').value;
+    lines.push('받으시는 분 소속 : '+AFF_LABEL[state.aff]+(org?' ('+org+')':''));
+    lines.push('받으시는 분 전화번호 : '+(document.getElementById('ivf-r-phone').value || ''));
+    lines.push('받으시는 분 주소 : '+(document.getElementById('ivf-r-address').value || ''));
+    if(r.hasPdf){
+      lines.push('PDF 열람용 이메일 : '+(document.getElementById('ivf-r-pdf-email').value || ''));
+    }
+    return lines.join('\n');
+  }
+
+  function refreshOrderText(){
+    if(document.getElementById('ivf-order-panel').classList.contains('open')){
+      document.getElementById('ivf-order-text').value = buildOrderText();
+    }
+  }
+
+  function showCopiedMsg(){
+    var msg = document.getElementById('ivf-copied-msg');
+    msg.style.display = 'inline';
+    setTimeout(function(){ msg.style.display = 'none'; }, 2000);
+  }
+
+  var ivfShop = {
+    setAff: function(aff, btn){
+      state.aff = aff;
+      document.querySelectorAll('#ivf-resource-shop .ivf-aff-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      updatePriceLabels();
+      updateSummary();
+      refreshOrderText();
+    },
+    step: function(key, delta){
+      state.qty[key] = Math.max(0, state.qty[key] + delta);
+      document.getElementById('qty-'+key).value = state.qty[key];
+      updateSummary();
+      refreshOrderText();
+    },
+    setQty: function(key, val){
+      var n = parseInt(val, 10);
+      if(isNaN(n) || n < 0) n = 0;
+      state.qty[key] = n;
+      document.getElementById('qty-'+key).value = n;
+      updateSummary();
+      refreshOrderText();
+    },
+    stepBook: function(id, type, delta){
+      var s = state.booklet[id];
+      s[type] = Math.max(0, s[type] + delta);
+      document.getElementById('qty-'+id+'-'+type).value = s[type];
+      updateSummary();
+      refreshOrderText();
+    },
+    setBookQty: function(id, type, val){
+      var n = parseInt(val, 10);
+      if(isNaN(n) || n < 0) n = 0;
+      state.booklet[id][type] = n;
+      document.getElementById('qty-'+id+'-'+type).value = n;
+      updateSummary();
+      refreshOrderText();
+    },
+    toggleDetail: function(key){
+      var gallery = document.getElementById('detail-gallery-'+key);
+      var btn = document.getElementById('detail-toggle-'+key);
+      var opening = !gallery.classList.contains('open');
+      gallery.classList.toggle('open');
+      btn.classList.toggle('open');
+      btn.firstChild.textContent = opening ? '접기 ' : '자세히 보기 ';
+    },
+    openOrder: function(){
+      document.getElementById('ivf-order-panel').classList.add('open');
+      document.getElementById('ivf-order-text').value = buildOrderText();
+      document.getElementById('ivf-order-panel').scrollIntoView({behavior:'smooth', block:'start'});
+    },
+    copyOrder: function(){
+      var ta = document.getElementById('ivf-order-text');
+      ta.value = buildOrderText();
+      ta.focus();
+      ta.select();
+      ta.setSelectionRange(0, ta.value.length);
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch(e) { ok = false; }
+      if(ok){
+        showCopiedMsg();
+        return;
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(ta.value).then(function(){
+          showCopiedMsg();
+        }).catch(function(){
+          alert('자동 복사에 실패했어요. 아래 미리보기 칸이 전체 선택되어 있으니 Ctrl+C(맥은 Cmd+C)를 눌러 복사해주세요.');
+        });
+      } else {
+        alert('자동 복사에 실패했어요. 아래 미리보기 칸이 전체 선택되어 있으니 Ctrl+C(맥은 Cmd+C)를 눌러 복사해주세요.');
+      }
+    },
+    mailOrder: function(){
+      var body = buildOrderText();
+      var name = document.getElementById('ivf-r-name').value || '주문자';
+      var subject = '[IVF 자료실 주문] ' + name;
+      var url = 'mailto:upgrade@ivf.or.kr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      window.location.href = url;
+    }
+  };
+  window.ivfShop = ivfShop;
+
+  ['ivf-r-name','ivf-r-org','ivf-r-phone','ivf-r-address','ivf-r-pdf-email'].forEach(function(id){
+    document.getElementById(id).addEventListener('input', refreshOrderText);
+  });
+
+  renderBooklets();
+  updatePriceLabels();
+  updateSummary();
+})();
+</script>
+</div>
