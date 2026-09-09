@@ -34,7 +34,7 @@
     padding: 24px 28px 0 28px;
   }
   #ivf-resource-shop .ivf-brand-logo img {
-    height: 26px;
+    height: 78px;
     display: block;
   }
   #ivf-resource-shop .ivf-hero {
@@ -152,6 +152,11 @@
   }
   #ivf-resource-shop .ivf-detail-gallery img:last-child {
     margin-bottom: 0;
+  }
+  #ivf-resource-shop #detail-gallery-kit img {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* book cover cards */
@@ -639,9 +644,10 @@
 
   <div class="ivf-order-actions">
     <button class="ivf-btn-secondary" onclick="ivfShop.copyOrder()">주문서 복사하기</button>
-    <button class="ivf-cta-solid" onclick="ivfShop.mailOrder()">이메일로 보내기</button>
     <span class="ivf-copied-msg" id="ivf-copied-msg">복사되었어요 ✓</span>
   </div>
+
+  <p style="margin-top:16px; font-size:14px; color:var(--ink-soft);">주문서는 IVF 자료개발부 이메일로 보내주세요.<br>→ <b style="color:var(--accent);">upgrade@ivf.or.kr</b></p>
 </div>
 
 <script>
@@ -849,13 +855,6 @@
       } else {
         alert('자동 복사에 실패했어요. 아래 미리보기 칸이 전체 선택되어 있으니 Ctrl+C(맥은 Cmd+C)를 눌러 복사해주세요.');
       }
-    },
-    mailOrder: function(){
-      var body = buildOrderText();
-      var name = document.getElementById('ivf-r-name').value || '주문자';
-      var subject = '[IVF 자료실 주문] ' + name;
-      var url = 'mailto:upgrade@ivf.or.kr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-      window.location.href = url;
     }
   };
   window.ivfShop = ivfShop;
