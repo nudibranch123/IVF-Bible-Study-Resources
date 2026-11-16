@@ -248,6 +248,44 @@
     margin: 0;
   }
 
+  /* new-release badge + leadership series */
+  #ivf-resource-shop .ivf-badge-new {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+    padding: 2px 9px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 10px;
+    letter-spacing: .02em;
+  }
+  #ivf-resource-shop .ivf-books-row-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (max-width: 640px) {
+    #ivf-resource-shop .ivf-books-row-4 { grid-template-columns: repeat(2, 1fr); }
+  }
+  #ivf-resource-shop .ivf-book-cover-tall {
+    aspect-ratio: 1512 / 2220;
+  }
+  #ivf-resource-shop .ivf-book-sub {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+    word-break: keep-all;
+  }
+  #ivf-resource-shop .ivf-section-head p { word-break: keep-all; }
+  #ivf-resource-shop .ivf-book-desc {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin-bottom: 8px;
+    word-break: keep-all;
+  }
+
   /* bundle highlight card */
   #ivf-resource-shop .ivf-bundle {
     background: var(--accent-bg);
@@ -452,6 +490,100 @@
     <button class="ivf-aff-btn" data-aff="member" onclick="ivfShop.setAff('member', this)">IVF 학생 · 간사</button>
   </div>
 </div>
+
+<!-- SECTION 0: IVF 리더십 훈련 시리즈 (신간) -->
+<section>
+  <div class="ivf-section-head">
+    <h2>IVF 리더십 훈련 시리즈<span class="ivf-badge-new">신간</span></h2>
+    <p>리더의 이야기가 시작되고, 펼쳐지고, 넘어지고, 깊어지는 곳. 하나님 나라 리더로 자라가는 여정을 4권에 담았어요.</p>
+  </div>
+
+  <div class="ivf-books-row ivf-books-row-4">
+    <div class="ivf-book">
+      <div class="ivf-book-cover ivf-book-cover-tall"><img src="covers/lead1.jpg" alt="부르심" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="ivf-book-body">
+        <div class="ivf-book-name">부르심</div>
+        <div class="ivf-book-sub">리더의 이야기가 시작되는 곳</div>
+        <div class="ivf-book-desc">모세의 부르심을 따라가며 나누는 하나님 나라 리더로의 부르심 이야기</div>
+        <div class="ivf-price" data-price-for="lead1"></div>
+        <div class="ivf-stepper">
+          <button onclick="ivfShop.step('lead1',-1)">−</button>
+          <input type="number" class="ivf-qty" id="qty-lead1" value="0" min="0" inputmode="numeric" onchange="ivfShop.setQty('lead1', this.value)">
+          <button onclick="ivfShop.step('lead1',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ivf-book">
+      <div class="ivf-book-cover ivf-book-cover-tall"><img src="covers/lead2.jpg" alt="공동체" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="ivf-book-body">
+        <div class="ivf-book-name">공동체</div>
+        <div class="ivf-book-sub">리더의 이야기가 펼쳐지는 곳</div>
+        <div class="ivf-book-desc">하나님나라 공동체를 세우는 리더 공동체의 세 가지 핵심 자질</div>
+        <div class="ivf-price" data-price-for="lead2"></div>
+        <div class="ivf-stepper">
+          <button onclick="ivfShop.step('lead2',-1)">−</button>
+          <input type="number" class="ivf-qty" id="qty-lead2" value="0" min="0" inputmode="numeric" onchange="ivfShop.setQty('lead2', this.value)">
+          <button onclick="ivfShop.step('lead2',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ivf-book">
+      <div class="ivf-book-cover ivf-book-cover-tall"><img src="covers/lead3.jpg" alt="그림자" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="ivf-book-body">
+        <div class="ivf-book-name">그림자</div>
+        <div class="ivf-book-sub">리더의 이야기가 넘어지는 곳</div>
+        <div class="ivf-book-desc">공동체의 리더가 반면교사로 삼아야 할 성경 속 빌런 리더의 내면 분석</div>
+        <div class="ivf-price" data-price-for="lead3"></div>
+        <div class="ivf-stepper">
+          <button onclick="ivfShop.step('lead3',-1)">−</button>
+          <input type="number" class="ivf-qty" id="qty-lead3" value="0" min="0" inputmode="numeric" onchange="ivfShop.setQty('lead3', this.value)">
+          <button onclick="ivfShop.step('lead3',1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ivf-book">
+      <div class="ivf-book-cover ivf-book-cover-tall"><img src="covers/lead4.jpg" alt="자라남" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="ivf-book-body">
+        <div class="ivf-book-name">자라남</div>
+        <div class="ivf-book-sub">리더의 이야기가 깊어지는 곳</div>
+        <div class="ivf-book-desc">베드로의 여정을 따라가며 돌아보고 내다보는 리더의 성숙 이야기</div>
+        <div class="ivf-price" data-price-for="lead4"></div>
+        <div class="ivf-stepper">
+          <button onclick="ivfShop.step('lead4',-1)">−</button>
+          <input type="number" class="ivf-qty" id="qty-lead4" value="0" min="0" inputmode="numeric" onchange="ivfShop.setQty('lead4', this.value)">
+          <button onclick="ivfShop.step('lead4',1)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ivf-bundle">
+    <div>
+      <div class="ivf-bundle-title">리더십 훈련 시리즈 4권 세트 (각 1권씩)</div>
+      <div class="ivf-bundle-sub" data-price-for="leadset"></div>
+    </div>
+    <div class="ivf-stepper">
+      <button onclick="ivfShop.step('leadset',-1)">−</button>
+      <input type="number" class="ivf-qty" id="qty-leadset" value="0" min="0" inputmode="numeric" onchange="ivfShop.setQty('leadset', this.value)">
+      <button onclick="ivfShop.step('leadset',1)">+</button>
+    </div>
+  </div>
+
+  <div class="ivf-note">
+    <div>· 4권의 책을 꼭 순서대로 볼 필요는 없고, 각자의 영적 여정의 필요에 따라 선택해서 보시면 됩니다.</div>
+    <div>· 이 책들은 개인 묵상, 일대일 대화, 소그룹 나눔 등에 자유롭게 활용될 수 있습니다.</div>
+  </div>
+
+  <button class="ivf-detail-toggle" id="detail-toggle-lead" onclick="ivfShop.toggleDetail('lead')">
+    자세히 보기 <span class="ivf-chevron">▾</span>
+  </button>
+  <div class="ivf-detail-gallery" id="detail-gallery-lead">
+    <img src="covers/detail-leadership/1.jpg" alt="IVF 리더십 훈련 시리즈 상세">
+  </div>
+</section>
 
 <!-- SECTION 1: BIBS / PIBS / GIBS -->
 <section>
@@ -659,8 +791,15 @@
     gibs:  { member: 7000,  general: 10000 },
     set:   { member: 20000, general: 27000 },
     kit:   { member: 28000, general: 35000 },
-    kitset:{ member: 33000, general: 42000 }
+    kitset:{ member: 33000, general: 42000 },
+    lead1: { member: 6500,  general: 8000 },
+    lead2: { member: 6500,  general: 8000 },
+    lead3: { member: 6500,  general: 8000 },
+    lead4: { member: 6500,  general: 8000 },
+    leadset:{ member: 23000, general: 30000 }
   };
+  var KEYS = ['lead1','lead2','lead3','lead4','leadset','bibs','pibs','gibs','set','kit','kitset'];
+  var UNIT = { lead1:'권', lead2:'권', lead3:'권', lead4:'권', leadset:'세트' };
   var BOOKLETS = [
     { id:'gospel',     name:'나와 너, 우리를 찾아온 복음',   member:4000, general:5000, pdf:3600, cover:'covers/bogeum.jpg' },
     { id:'findme',     name:'나를 찾아가는 이야기 (나찾기)', member:4000, general:5000, pdf:3600, cover:'covers/nachatgi.jpg' },
@@ -668,12 +807,15 @@
     { id:'conversion', name:'하나님 나라 복음으로의 회심',    member:3000, general:3600, pdf:3600, cover:'covers/hoesim.jpg' }
   ];
   var LABELS = {
+    lead1:'리더십 훈련 시리즈 - 부르심', lead2:'리더십 훈련 시리즈 - 공동체',
+    lead3:'리더십 훈련 시리즈 - 그림자', lead4:'리더십 훈련 시리즈 - 자라남',
+    leadset:'리더십 훈련 시리즈 4권 세트',
     bibs:'BIBS 개별', pibs:'PIBS 개별', gibs:'GIBS 개별',
     set:'B·P·G 3권 세트', kit:'GIBS 진행키트', kitset:'GIBS 진행키트 + 책 세트'
   };
   var AFF_LABEL = { member:'IVF 학생 및 간사', general:'졸업생 및 일반' };
 
-  var state = { aff:'general', qty:{ bibs:0,pibs:0,gibs:0,set:0,kit:0,kitset:0 }, booklet:{} };
+  var state = { aff:'general', qty:{ lead1:0,lead2:0,lead3:0,lead4:0,leadset:0,bibs:0,pibs:0,gibs:0,set:0,kit:0,kitset:0 }, booklet:{} };
   BOOKLETS.forEach(function(b){ state.booklet[b.id] = { paper:0, pdf:0 }; });
 
   function fmt(n){ return n.toLocaleString('ko-KR'); }
@@ -700,11 +842,13 @@
   }
 
   function updatePriceLabels(){
-    ['bibs','pibs','gibs'].forEach(function(k){
+    ['lead1','lead2','lead3','lead4','bibs','pibs','gibs'].forEach(function(k){
       var el = document.querySelector('[data-price-for="'+k+'"]');
       var p = PRICE[k][state.aff];
       el.innerHTML = (state.aff==='member' ? '<span class="ivf-strike">'+fmt(PRICE[k].general)+'원</span>' : '') + '<b>'+fmt(p)+'원</b>';
     });
+    var leadsetEl = document.querySelector('[data-price-for="leadset"]');
+    leadsetEl.innerHTML = '개별 구매보다 저렴해요 · ' + (state.aff==='member' ? '<span class="ivf-strike">'+fmt(PRICE.leadset.general)+'원</span>' : '') + '<b>'+fmt(PRICE.leadset[state.aff])+'원</b>';
     var setEl = document.querySelector('[data-price-for="set"]');
     setEl.innerHTML = '개별 구매보다 저렴해요 · <b>'+fmt(PRICE.set[state.aff])+'원</b>';
     var kitEl = document.querySelector('[data-price-for="kit"]');
@@ -721,7 +865,7 @@
 
   function calcTotal(){
     var total = 0, count = 0, hasPdf = false;
-    ['bibs','pibs','gibs','set','kit','kitset'].forEach(function(k){
+    KEYS.forEach(function(k){
       var q = state.qty[k];
       if(q>0){ total += PRICE[k][state.aff]*q; count += q; }
     });
@@ -745,9 +889,9 @@
 
   function buildOrderText(){
     var lines = ['<주문내역>'];
-    ['set','bibs','pibs','gibs','kit','kitset'].forEach(function(k){
+    KEYS.forEach(function(k){
       var q = state.qty[k];
-      if(q>0) lines.push('- '+LABELS[k]+' : '+q+'개');
+      if(q>0) lines.push('- '+LABELS[k]+' : '+q+(UNIT[k]||'개'));
     });
     BOOKLETS.forEach(function(b){
       var s = state.booklet[b.id];
